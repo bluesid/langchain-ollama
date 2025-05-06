@@ -1,4 +1,4 @@
-from langchain.document_loaders import TextLoader
+from langchain_community.document_loaders import TextLoader
 documents = TextLoader("AI.txt").load()
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -12,10 +12,11 @@ docs = split_docs(documents)
 
 # Ollama 임베딩 사용
 from langchain_community.embeddings import OllamaEmbeddings
+# from langchain_ollama import OllamaEmbeddings
 embeddings = OllamaEmbeddings(model="exaone3.5")  # 다른 임베딩 모델로 교체 가능
 
 # Chroma를 이용해 임베딩 저장
-from langchain.vectorstores import Chroma
+from langchain_community.vectorstores import Chroma
 db = Chroma.from_documents(docs, embeddings, persist_directory="rag_data")
 
 # Ollama LLM 사용 (예: mistral, llama2 등)
