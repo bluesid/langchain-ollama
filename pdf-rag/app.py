@@ -1,10 +1,10 @@
 import streamlit as st
 from PyPDF2 import PdfReader
-from langchain.embeddings import OllamaEmbeddings
-from langchain.chat_models import ChatOllama
+from langchain_ollama import OllamaEmbeddings
+from langchain_ollama import ChatOllama
 from langchain.chains import ConversationalRetrievalChain
 from langchain.memory import ConversationBufferWindowMemory
-from langchain.vectorstores import FAISS
+from langchain_community.vectorstores import FAISS
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 # PDF에서 텍스트 추출
@@ -63,7 +63,7 @@ if user_uploads:
 
 if user_query := st.chat_input("질문을 입력해주세요 💬"):
     if 'conversation' in st.session_state:
-        result = st.session_state.conversation({
+        result = st.session_state.conversation.invoke({
             "question": user_query,
             "chat_history": st.session_state.get("chat_history", [])
         })
