@@ -1,10 +1,10 @@
 import streamlit as st
 from streamlit_chat import message
-from langchain.embeddings import OllamaEmbeddings
-from langchain.chat_models import ChatOllama
+from langchain_ollama import OllamaEmbeddings
+from langchain_ollama import ChatOllama
 from langchain.chains import ConversationalRetrievalChain
-from langchain.vectorstores import FAISS
-from langchain.document_loaders import PyPDFLoader
+from langchain_community.vectorstores import FAISS
+from langchain_community.document_loaders import PyPDFLoader
 import tempfile
 
 uploaded_file = st.sidebar.file_uploader("PDF 파일 업로드", type="pdf")
@@ -29,7 +29,7 @@ if uploaded_file:
     )
 
     def conversational_chat(query):
-        result = chain({
+        result = chain.invoke({
             "question": query,
             "chat_history": st.session_state['history']
         })
