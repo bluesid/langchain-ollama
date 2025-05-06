@@ -1,0 +1,5 @@
+unstructured
+chromadb
+langchain
+langchain_community
+langchain-ollama
